@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 // Create axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://8080-firebase-acquire-b-1753295086620.cluster-isls3qj2gbd5qs4jkjqvhahfv6.cloudworkstations.dev/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
