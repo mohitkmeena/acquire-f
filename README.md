@@ -119,4 +119,4 @@ colors: {
 
 ---
 
-Built with ❤️ for the Indian startup ecosystem
+
