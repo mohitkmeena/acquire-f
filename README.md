@@ -23,18 +23,6 @@ A modern React frontend for the acquire.india marketplace - India's premier plat
 - **Axios** - HTTP client with interceptors
 - **Lucide Icons** - Beautiful SVG icons
 
-## 🎨 Design System
-
-### Colors
-- **Primary**: Deep Blue (#0A1F44) - Professional and trustworthy
-- **Accent**: Saffron Orange (#F57C00) - Indian vibrancy
-- **Typography**: Inter font family for clean readability
-
-### Components
-- Rounded cards with subtle shadows
-- Consistent 8px spacing system
-- Hover states and micro-interactions
-- Professional form styling
 
 ## 🚦 Getting Started
 
@@ -67,20 +55,7 @@ A modern React frontend for the acquire.india marketplace - India's premier plat
 4. **Open your browser**
    Navigate to `http://localhost:5173`
 
-## 📁 Project Structure
 
-```
-src/
-├── components/          # Reusable UI components
-│   ├── Layout/         # Layout components (Header, Footer)
-│   ├── Listings/       # Listing-related components
-│   └── UI/             # Generic UI components
-├── pages/              # Page components
-├── services/           # API services and utilities
-├── store/              # Zustand state management
-├── styles/             # Global styles and Tailwind config
-└── utils/              # Helper functions
-```
 
 ## 🔐 Authentication
 
@@ -95,21 +70,9 @@ The app includes a complete authentication system with:
 ### Demo Accounts
 - **Buyer**: Quick access to buyer features
 - **Seller**: Access to seller dashboard and listing management
-- **Admin**: Full administrative access
 
-## 🎯 Key Pages
 
-### Home Page
-- Hero section with compelling value proposition
-- Trust indicators and social proof
-- Feature highlights
-- Call-to-action buttons
 
-### Explore Listings
-- Advanced search and filtering
-- Grid/List view toggle
-- Sorting options
-- Responsive pagination
 
 ### Authentication
 - Clean login/register forms
@@ -119,7 +82,7 @@ The app includes a complete authentication system with:
 
 ## 🔧 API Integration
 
-The frontend is ready to integrate with your Spring Boot backend:
+
 
 - **Axios interceptors** for auth tokens
 - **Error handling** with user-friendly messages
@@ -141,33 +104,7 @@ colors: {
 }
 ```
 
-### Components
-All components are modular and easily customizable. Update styles in the component files or extend Tailwind classes.
 
-## 📱 Responsive Design
-
-The app is fully responsive with breakpoints:
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px  
-- **Desktop**: > 1024px
-
-## 🚀 Deployment
-
-### Build for Production
-```bash
-npm run build
-```
-
-### Deploy to Vercel
-```bash
-npm install -g vercel
-vercel --prod
-```
-
-### Deploy to Netlify
-1. Build the project: `npm run build`
-2. Upload the `dist` folder to Netlify
-3. Set environment variables in Netlify dashboard
 
 ## 🤝 Contributing
 
@@ -177,15 +114,7 @@ vercel --prod
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
 
-This project is licensed under the MIT License.
-
-## 🆘 Support
-
-For support and questions:
-- Email: hello@acquire.india
-- Documentation: [Link to docs]
 - Issues: [GitHub Issues]
 
 ---
