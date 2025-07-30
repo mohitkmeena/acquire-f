@@ -1,31 +1,44 @@
 import axios from 'axios';
 import useAuthStore from '../store/authStore';
 import toast from 'react-hot-toast';
+import { envConfig } from '../config/environment';
 
-// Create axios instance
+// Create axios instance with improved CORS configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://8080-firebase-acquire-b-1753295086620.cluster-isls3qj2gbd5qs4jkjqvhahfv6.cloudworkstations.dev/api',
+  baseURL: envConfig.apiUrl,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
+  // Enable credentials for CORS based on environment config
+  withCredentials: envConfig.credentials,
 });
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and CORS headers
 api.interceptors.request.use(
   (config) => {
     const token = useAuthStore.getState().token;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Add CORS headers only if enabled
+    if (envConfig.corsEnabled) {
+      config.headers['Access-Control-Allow-Origin'] = '*';
+      config.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+      config.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With';
+    }
+    
     return config;
   },
   (error) => {
+    console.error('Request interceptor error:', error);
     return Promise.reject(error);
   }
 );
 
-// Response interceptor for error handling
+// Response interceptor for error handling with improved CORS error handling
 api.interceptors.response.use(
   (response) => {
     return response;
@@ -33,12 +46,21 @@ api.interceptors.response.use(
   (error) => {
     const { response } = error;
     
+    // Handle CORS errors specifically
+    if (error.code === 'ERR_NETWORK' || error.message.includes('CORS')) {
+      toast.error('Network error. Please check your connection and try again.');
+      console.error('CORS/Network error:', error);
+      return Promise.reject(error);
+    }
+    
     if (response?.status === 401) {
       useAuthStore.getState().logout();
       toast.error('Session expired. Please login again.');
       window.location.href = '/auth';
     } else if (response?.status === 403) {
       toast.error('Access denied. Insufficient permissions.');
+    } else if (response?.status === 404) {
+      toast.error('Resource not found.');
     } else if (response?.status >= 500) {
       toast.error('Server error. Please try again later.');
     } else if (response?.data?.message) {
@@ -47,6 +69,7 @@ api.interceptors.response.use(
       toast.error('An unexpected error occurred.');
     }
     
+    console.error('API Error:', error);
     return Promise.reject(error);
   }
 );
